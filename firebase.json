@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "the-unsung-heir",
     "public": "build/web",
     "ignore": [
       "firebase.json",
