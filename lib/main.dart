@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     print("***********************");
     print(googleAuth?.accessToken);
-    print(googleAuth?.idToken);
+    // print(googleAuth?.idToken);
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
