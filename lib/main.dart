@@ -7,18 +7,25 @@ import 'package:winter_school/questions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  // await Firebase.initializeApp(
-  //   // Replace with actual values
-  //   options: const FirebaseOptions(
-  //       apiKey: "AIzaSyBwGDmiEuXfcF4X_1xN0oBbJfm50STTQ5U",
-  //       authDomain: "winterschool-4e953.firebaseapp.com",
-  //       projectId: "winterschool-4e953",
-  //       storageBucket: "winterschool-4e953.appspot.com",
-  //       messagingSenderId: "584612848947",
-  //       appId: "1:584612848947:web:d9e202cfeca7fca80b8a46",
-  //       measurementId: "G-XYC4L2JNKE"),
-  // );
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      name: "WinterSchool",
+      // Replace with actual values
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyBwGDmiEuXfcF4X_1xN0oBbJfm50STTQ5U",
+          authDomain: "winterschool-4e953.firebaseapp.com",
+          projectId: "winterschool-4e953",
+          storageBucket: "winterschool-4e953.appspot.com",
+          messagingSenderId: "584612848947",
+          appId: "1:584612848947:web:d9e202cfeca7fca80b8a46",
+          measurementId: "G-XYC4L2JNKE"),
+    ).whenComplete(() {
+      print("completedAppInitialize");
+    });
+  } else {
+    Firebase.initializeApp();
+  }
+
   runApp(MyApp());
 }
 
@@ -73,7 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String htmldata =
       '<img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" alt="Lamp" width="32" height="32">';
   Future<UserCredential> signInWithGoogle() async {
+    print("hello");
     // Trigger the authentication flow
+
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     print(googleUser);
     // Obtain the auth details from the request
@@ -128,8 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
             });
 
             try {
+              print("I am here");
               // await GoogleSignIn().signOut();
               await signInWithGoogle().then((value) async {
+                print("hello");
                 if (value.additionalUserInfo!.isNewUser) {
                   String docid = value.user!.uid;
                   CollectionReference users =
