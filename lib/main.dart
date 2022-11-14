@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:winter_school/questions.dart';
+import 'package:winter_school/first-page.dart';
+import 'package:video_player/video_player.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Scout The Untold Tech',
+      title: 'THE UNSUNG HEIR',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Scout The Untold Tech'),
+      home: const MyHomePage(title: 'THE UNSUNG HEIR'),
     );
   }
 }
@@ -107,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/coverwinter.jpg"),
+            image: AssetImage("assets/owaspfront.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -162,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute<void>(
                         builder: (BuildContext context) =>
-                            Questions(uid: value.user!.uid),
+                            firstpage(value.user!.uid),
                       ),
                     );
                   });
@@ -171,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) =>
-                          Questions(uid: value.user!.uid),
+                          firstpage(value.user!.uid),
                     ),
                   );
                 }

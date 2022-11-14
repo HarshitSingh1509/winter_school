@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:winter_school/congrats.dart';
@@ -35,6 +36,7 @@ class _QuestionsState extends State<Questions> {
   String onwronglink = "";
   String hint1 = "";
   String hint2 = "";
+  String story = "";
   String photo = "";
   String link = "";
   String answer = "";
@@ -73,6 +75,7 @@ class _QuestionsState extends State<Questions> {
       onwronglink = doc1["onwronglink"] ?? "";
       hint1 = doc1["hint1"] ?? "";
       hint2 = doc1["hint2"] ?? "";
+      story = doc1["story"] ?? "";
       //    time = DateTime.parse(doc1["starttime"]);
     });
     await questionofuser();
@@ -138,8 +141,8 @@ class _QuestionsState extends State<Questions> {
             ? Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/treasurebackg.jpg"),
-                    fit: BoxFit.cover,
+                    image: AssetImage("assets/owasp1.jpg"),
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 child: Center(
@@ -152,7 +155,7 @@ class _QuestionsState extends State<Questions> {
             : Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/treasurebackg.jpg"),
+                    image: AssetImage("assets/owasp1.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -175,14 +178,16 @@ class _QuestionsState extends State<Questions> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
-                                    "Score: ${(score - factor * 100 * minutes).round()}"),
+                                  "Score: ${(score - factor * 100 * minutes).round()}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 Padding(
                                     padding:
                                         const EdgeInsets.symmetric(vertical: 5),
                                     child: Text('$minutes:$seconds',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 30))),
                               ],
@@ -201,9 +206,25 @@ class _QuestionsState extends State<Questions> {
                                 padding: const EdgeInsets.all(20),
                                 child: Text(
                                   "Hint 1",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               )),
+                          InkWell(
+                            onTap: () {
+                              showAlertDialog2(context);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Text(
+                                "Story",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
                           InkWell(
                               onTap: () {
                                 showAlertDialog1(context);
@@ -212,7 +233,9 @@ class _QuestionsState extends State<Questions> {
                                 padding: const EdgeInsets.all(20),
                                 child: Text(
                                   "Hint 2",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               ))
                         ],
@@ -222,7 +245,7 @@ class _QuestionsState extends State<Questions> {
                       ),
                       Text(
                         "Question No. $questionid",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       SizedBox(
                         height: 50,
@@ -237,7 +260,53 @@ class _QuestionsState extends State<Questions> {
                       SizedBox(
                         height: 30,
                       ),
-                      istext ? Text(text) : Container(),
+                      istext
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 25, right: 25),
+                              child: Card(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(35.0),
+                                  child: Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          'Story',
+                                          style: TextStyle(
+                                            fontSize: 25.0,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                            top: 15,
+                                            bottom: 30,
+                                          ),
+                                          width: 100,
+                                          height: 10,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        text,
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
                       SizedBox(
                         height: 30,
                       ),
@@ -255,10 +324,11 @@ class _QuestionsState extends State<Questions> {
                                   launch(link);
                                 },
                                 padding: EdgeInsets.all(10.0),
-                                color: Colors.purple,
+                                color: Colors.black,
                                 textColor: Colors.white,
-                                child: Text("Link to the Question",
-                                    style: TextStyle(fontSize: 15)),
+                                child: Text("Download Image",
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.white)),
                               ),
                             )
                           : Container(),
@@ -271,7 +341,7 @@ class _QuestionsState extends State<Questions> {
                             autofocus: false,
                             onSubmitted: (value) async {
                               if (value.toLowerCase() == answer) {
-                                if (questionid < 9) {
+                                if (questionid < 11) {
                                   await updateanswerofuser();
                                   await updateinfoofuser();
                                   Navigator.pushReplacement(
@@ -295,7 +365,7 @@ class _QuestionsState extends State<Questions> {
                               }
                             },
                             style:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
+                                TextStyle(fontSize: 15.0, color: Colors.white),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Your Answer',
@@ -304,11 +374,11 @@ class _QuestionsState extends State<Questions> {
                               contentPadding: const EdgeInsets.only(
                                   left: 14.0, bottom: 6.0, top: 8.0),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
+                                borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
+                                borderSide: BorderSide(color: Colors.black),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
@@ -349,11 +419,10 @@ class _QuestionsState extends State<Questions> {
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(
-                                  color: Color.fromRGBO(0, 160, 227, 1))),
+                              side: BorderSide(color: Colors.black)),
                           onPressed: () async {
                             if (txt.text.toLowerCase() == answer) {
-                              if (questionid < 9) {
+                              if (questionid < 11) {
                                 await updateanswerofuser();
                                 await updateinfoofuser();
                                 Navigator.pushReplacement(
@@ -377,10 +446,11 @@ class _QuestionsState extends State<Questions> {
                             }
                           },
                           padding: EdgeInsets.all(10.0),
-                          color: Colors.purple,
+                          color: Colors.black,
                           textColor: Colors.white,
                           child: Text("     Submit    ",
-                              style: TextStyle(fontSize: 15)),
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white)),
                         ),
                       ),
                     ],
@@ -392,7 +462,10 @@ class _QuestionsState extends State<Questions> {
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = TextButton(
-      child: Text("OK"),
+      child: Text(
+        "OK",
+        style: TextStyle(color: Colors.white),
+      ),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -400,7 +473,7 @@ class _QuestionsState extends State<Questions> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Hint 1"),
+      title: Text("Hint 1", style: TextStyle(color: Colors.white)),
       content: Text(DateTime.now().difference(time).inMinutes > 30
           ? hint1
           : "Please Wait for ${30 - DateTime.now().difference(time).inMinutes} minutes"),
@@ -421,7 +494,7 @@ class _QuestionsState extends State<Questions> {
   showAlertDialog1(BuildContext context) {
     // set up the button
     Widget okButton = TextButton(
-      child: Text("OK"),
+      child: Text("OK", style: TextStyle(color: Colors.white)),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -429,10 +502,44 @@ class _QuestionsState extends State<Questions> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Hint 2"),
+      title: Text("Hint 2", style: TextStyle(color: Colors.white)),
       content: Text(DateTime.now().difference(time).inMinutes > 90
           ? hint2
           : "Please Wait for ${90 - DateTime.now().difference(time).inMinutes} minutes"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialog2(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text(
+        "OK",
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Story", style: TextStyle(color: Colors.white)),
+      content: SingleChildScrollView(
+        child: Text(
+          story,
+        ),
+      ),
       actions: [
         okButton,
       ],
