@@ -14,13 +14,14 @@ void main() async {
       name: "WinterSchool",
       // Replace with actual values
       options: const FirebaseOptions(
-          apiKey: "AIzaSyBwGDmiEuXfcF4X_1xN0oBbJfm50STTQ5U",
-          authDomain: "winterschool-4e953.firebaseapp.com",
-          projectId: "winterschool-4e953",
-          storageBucket: "winterschool-4e953.appspot.com",
-          messagingSenderId: "584612848947",
-          appId: "1:584612848947:web:d9e202cfeca7fca80b8a46",
-          measurementId: "G-XYC4L2JNKE"),
+        apiKey: "AIzaSyCSUZZhL6rWHUC05rKlbROfiOUR8ScfDpA",
+        authDomain: "owaso11.firebaseapp.com",
+        projectId: "owaso11",
+        storageBucket: "owaso11.appspot.com",
+        messagingSenderId: "228439707202",
+        appId: "1:228439707202:web:df85ee935f5788fc3ba7db",
+      ),
+      // measurementId: "G-XYC4L2JNKE"
     ).whenComplete(() {
       print("completedAppInitialize");
     });

@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "584612848947",
-    "project_id": "winterschool-4e953",
-    "storage_bucket": "winterschool-4e953.appspot.com"
+    "project_number": "228439707202",
+    "project_id": "owaso11",
+    "storage_bucket": "owaso11.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:584612848947:android:5ebd9c0737ed428f0b8a46",
+        "mobilesdk_app_id": "1:228439707202:android:b66266e8fdb3f9063ba7db",
         "android_client_info": {
           "package_name": "com.example.winter_school"
         }
       },
       "oauth_client": [
         {
-          "client_id": "584612848947-ssu6ku1crdlos5eft4b2ojbjndtngrhh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.winter_school",
-            "certificate_hash": "cb58a4cd1d9255fd58d555e1a22f98c20860d3fb"
-          }
-        },
-        {
-          "client_id": "584612848947-2fuhin56c5cehqras8ok9eggb5rup6qd.apps.googleusercontent.com",
+          "client_id": "228439707202-dked0gnp7pgkkrf45outbb7lrv91ik9n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCF2b5zB0_Vzu_rcmOJ-lx5bqIxghlwOlo"
+          "current_key": "AIzaSyA9QVnGGwPqBwgzsNTkj0IVjEPRwSZq91g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "584612848947-2fuhin56c5cehqras8ok9eggb5rup6qd.apps.googleusercontent.com",
+              "client_id": "228439707202-dked0gnp7pgkkrf45outbb7lrv91ik9n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
